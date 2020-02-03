@@ -46,6 +46,20 @@ typedef struct r_anal_addr_hint_record_t {
 	};
 } RAnalAddrHintRecord;
 
+#define RANGE_HINT_RECORD_COMMON \
+	RBNode rb; \
+	ut64 addr;
+
+typedef struct r_anal_arch_hint_record_t {
+	RANGE_HINT_RECORD_COMMON
+	char *arch; // NULL => reset to global
+} RAnalArchHintRecord;
+
+typedef struct r_anal_arch_bits_record_t {
+	RANGE_HINT_RECORD_COMMON
+	int bits; // 0 => reset to global
+} RAnalArchBitsRecord;
+
 static void addr_hint_record_fini(void *element, void *user) {
 	(void)user;
 	RAnalAddrHintRecord *record = element;

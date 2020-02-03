@@ -675,13 +675,14 @@ typedef struct r_anal_t {
 	Sdb *sdb_args;  //
 	Sdb *sdb_vars; // globals?
 #endif
-	HtUP/*<RVector<RAnalAddrHintRecord>>*/ *addr_hints; // all hints that correspond to a
+	HtUP/*<RVector<RAnalAddrHintRecord>>*/ *addr_hints; // all hints that correspond to a single address
+	RBTree/*<RAnalArchHintRecord>*/ arch_hints; // each record means the entire range until the following record uses the specified arch
+	RBTree/*<RAnalArchBitsRecord>*/ bits_hints; // same range-semantics as for arch_hints
 	RHintCb hint_cbs;
 	Sdb *sdb_fcnsign; // OK
 	Sdb *sdb_cc; // calling conventions
 	Sdb *sdb_classes;
 	Sdb *sdb_classes_attrs;
-	//RList *hints; // XXX use better data structure here (slist?)
 	RAnalCallbacks cb;
 	RAnalOptions opt;
 	RList *reflines;
